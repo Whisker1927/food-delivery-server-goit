@@ -35,13 +35,15 @@ module.exports.create = function(req, res) {
       console.log(err);
       return res.sendStatus(500);
     }
-    res.send(product);
+    res.status(200).json(product);
   });
 };
 
 module.exports.update = function(req, res) {
-  const updateOdject = req.body.price;
-  Products.update(req.params.id, { $set: updateOdject }, function(err, result) {
+  const updatedPrice = {
+    price: req.body.price,
+  };
+  Products.update(req.params.id, updatedPrice, function(err, result) {
     if (err) {
       console.log(err);
       return res.sendStatus(500);

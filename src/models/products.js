@@ -21,7 +21,7 @@ module.exports.findById = function(id, cb) {
 module.exports.create = function(product, cb) {
   db.get()
     .collection('products')
-    .insert(product, function(err, result) {
+    .insertOne(product, function(err, result) {
       cb(err, result);
     });
 };
@@ -29,7 +29,7 @@ module.exports.create = function(product, cb) {
 module.exports.update = function(id, newData, cb) {
   db.get()
     .collection('products')
-    .updateOne({ _id: ObjectID(id) }, newData, function(err, result) {
+    .updateOne({ _id: ObjectID(id) }, { $set: newData }, function(err, result) {
       cb(err, result);
     });
 };
